@@ -98,8 +98,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 # ZSH
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+
+# Vim
+alias vimrc="vim ~/.vimrc"
 
 # VimGo
 alias vimgo='vim -u ~/.vimrc.go'
