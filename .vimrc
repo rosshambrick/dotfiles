@@ -14,6 +14,7 @@ Plug 'valloric/youcompleteme'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 "Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
@@ -40,6 +41,14 @@ set ignorecase
 set smartcase
 " show unwanted whitespace
 set list listchars=tab:→\ ,trail:·
+" better pane navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" better split openning
+set splitbelow
+set splitright
 " /vim
 
 
