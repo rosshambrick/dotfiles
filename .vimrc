@@ -12,10 +12,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
 Plug 'bling/vim-airline'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 "Plug 'benmills/vimux'
+"Plug 'scrooloose/syntastic'
 "Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 " /plugins
