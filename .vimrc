@@ -15,6 +15,7 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
+Plug '907th/vim-auto-save'
 "Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
@@ -111,6 +112,10 @@ let g:go_list_type = "quickfix"
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
 " /crtlp
+
+" vim-auto-save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+" /vim-auto-save
 
 
 function! s:DiffWithSaved()
