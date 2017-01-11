@@ -112,3 +112,13 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
 " /crtlp
 
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
