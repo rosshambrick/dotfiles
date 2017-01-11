@@ -49,6 +49,9 @@ nnoremap <C-H> <C-W><C-H>
 " better split openning
 set splitbelow
 set splitright
+" folding
+" set foldmethod=syntax
+" set foldnestmax=1
 " /vim
 
 
