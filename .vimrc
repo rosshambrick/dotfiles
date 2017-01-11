@@ -14,8 +14,8 @@ Plug 'valloric/youcompleteme'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'scrooloose/syntastic'
 "Plug 'benmills/vimux'
-"Plug 'scrooloose/syntastic'
 "Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 " /plugins
@@ -71,11 +71,13 @@ let g:NERDTreeChDirMode = 2
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" disable active mode for go files
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " /syntastic
 
 
@@ -97,6 +99,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
+" fix conflict with syntastic
+let g:go_list_type = "quickfix"
 " /vim-go
 
 
