@@ -55,6 +55,11 @@ inoremap jj <Esc>
 " better split openning
 set splitbelow
 set splitright
+" spaces, not tabs
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+filetype plugin indent on
 " folding
 " set foldmethod=syntax
 " set foldnestmax=1
