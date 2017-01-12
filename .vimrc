@@ -42,6 +42,9 @@ set ignorecase
 set smartcase
 " show unwanted whitespace
 set list listchars=tab:→\ ,trail:·
+" disable wrapping
+set formatoptions-=t
+set nowrap
 " better pane navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
