@@ -1,6 +1,5 @@
 let $GOPATH = '/Users/ross/go' " required for MacVim
 
-let mapleader = ','
 
 " plugins
 let g:plug_window = 'vertical botright new'
