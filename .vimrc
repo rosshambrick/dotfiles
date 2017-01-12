@@ -66,7 +66,7 @@ filetype plugin indent on
 " /vim
 
 
-" NERDTree Config
+" nerdtree
 " open a NERDTree automatically when vim starts up if no files were specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -79,6 +79,7 @@ let g:NERDTreeChDirMode = 2
 " open NERDTree automatically when vim starts up on opening a directory 
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " let NERDTreeShowHidden=1
+" /nerdtree
 
 
 " syntastic
@@ -123,11 +124,13 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
 " /crtlp
 
+
 " vim-auto-save
 let g:auto_save = 1  " enable AutoSave on Vim startup
 " /vim-auto-save
 
 
+" diff buffer with saved file
 function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
@@ -136,6 +139,8 @@ function! s:DiffWithSaved()
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
+" /diff
+
 
 " easygrep
 let g:EasyGrepMode=0
