@@ -74,6 +74,8 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
+let g:NERDTreeMapJumpPrevSibling = ''
+let g:NERDTreeMapJumpNextSibling = ''
 "
 " DISABLED
 " open NERDTree automatically when vim starts up on opening a directory 
