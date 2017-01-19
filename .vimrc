@@ -14,10 +14,17 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
-Plug '907th/vim-auto-save'
+Plug 'burnettk/vim-angular'
 Plug 'dkprice/vim-easygrep'
-"Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'embear/vim-localvimrc'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ternjs/tern_for_vim'
+Plug 'tpope/vim-abolish'
+"Plug '907th/vim-auto-save'
+"Plug 'chiel92/vim-autoformat'
 call plug#end()
 " /plugins
 
@@ -52,6 +59,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " map jj to esc
 inoremap jj <Esc>
+inoremap kk <Esc>
 " better split openning
 set splitbelow
 set splitright
@@ -63,6 +71,7 @@ filetype plugin indent on
 " folding
 " set foldmethod=syntax
 " set foldnestmax=1
+map <leader>f zfat
 " /vim
 
 
@@ -76,11 +85,11 @@ let NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMapJumpNextSibling = ''
+let NERDTreeShowHidden=1
 "
 " DISABLED
 " open NERDTree automatically when vim starts up on opening a directory 
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" let NERDTreeShowHidden=1
 " /nerdtree
 
 
@@ -124,6 +133,7 @@ let g:go_list_type = "quickfix"
 " crtlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
 " /crtlp
 
 

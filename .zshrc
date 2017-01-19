@@ -107,6 +107,12 @@ alias vimrc="vim ~/.vimrc"
 # VimGo
 alias vimgo='vim -u ~/.vimrc.go'
 
+#tmux
+alias ta='tmux a -t'
+alias tl='tmux ls'
+alias tn='tmux new -s'
+alias tk='tmux kill-session -t'
+
 alias git='noglob git'
 
 # added by travis gem
