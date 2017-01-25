@@ -1,16 +1,24 @@
+" airline
+let g:airline_powerline_fonts = 1
+" /airline
+
+
+" macvim
 let $GOPATH = '/Users/ross/go' " required for MacVim
+set gfn=hack
+" /macvim
 
 
 " plugins
 let g:plug_window = 'vertical botright new'
 call plug#begin()
+Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
-Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
@@ -18,13 +26,19 @@ Plug 'burnettk/vim-angular'
 Plug 'dkprice/vim-easygrep'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'embear/vim-localvimrc'
-Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'benmills/vimux'
+"Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-abolish'
 "Plug '907th/vim-auto-save'
 "Plug 'chiel92/vim-autoformat'
+Plug 'janko-m/vim-test'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+"Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'bling/vim-airline'
 call plug#end()
 " /plugins
 
@@ -32,6 +46,8 @@ call plug#end()
 " vim
 " <leader>
 let mapleader = ','
+" clipboard integration
+set clipboard=unnamed
 " UTF-8 support
 set encoding=utf-8
 " highlight cursor line
@@ -60,6 +76,7 @@ nnoremap <C-H> <C-W><C-H>
 " map jj to esc
 inoremap jj <Esc>
 inoremap kk <Esc>
+inoremap uu <Esc>
 " better split openning
 set splitbelow
 set splitright
@@ -177,4 +194,9 @@ let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
 " /easygrep
+
+" vim-test
+let test#strategy = "asyncrun"
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+" /vim-test
 
