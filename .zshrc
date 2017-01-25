@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/ross/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -98,7 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 # ZSH
-alias zshconfig="vim ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # Vim
@@ -125,4 +125,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 . /usr/local/etc/profile.d/z.sh
 
 # agnoster
-DEFAULT_USER='ross'
+DEFAULT_USER='rosshambrick'
+
+# rbenv
+eval "$(rbenv init -)"

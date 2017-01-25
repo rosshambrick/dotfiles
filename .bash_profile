@@ -1,4 +1,18 @@
-export GOPATH=$HOME/gopath
-export PATH=$PATH:$GOPATH/bin
+eval export PATH="/Users/rosshambrick/.rbenv/shims:${PATH}"
+export RBENV_SHELL=bash
+source '/usr/local/Cellar/rbenv/1.1.0/libexec/../completions/rbenv.bash'
+command rbenv rehash 2>/dev/null
+rbenv() {
+  local command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+  case "$command" in
+  rehash|shell)
+    eval "$(rbenv "sh-$command" "$@")";;
+  *)
+    command rbenv "$command" "$@";;
+  esac
+}
