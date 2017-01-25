@@ -16,7 +16,6 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
-"Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
@@ -27,19 +26,19 @@ Plug 'burnettk/vim-angular'
 Plug 'dkprice/vim-easygrep'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'embear/vim-localvimrc'
-"Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-abolish'
-"Plug '907th/vim-auto-save'
-"Plug 'chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-"Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'bling/vim-airline'
+"Plug 'chiel92/vim-autoformat'
+"Plug '907th/vim-auto-save'
+"Plug 'benmills/vimux'
+"Plug 'christoomey/vim-tmux-navigator'
+"Plug 'fatih/vim-go'
+Plug 'bling/vim-airline' " must run last
 call plug#end()
 " /plugins
 
@@ -74,7 +73,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" map jj to esc
+" map keys to esc
 inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap uu <Esc>
@@ -90,6 +89,8 @@ filetype plugin indent on
 " set foldmethod=syntax
 " set foldnestmax=1
 map <leader>f zfat
+" tags
+set tags=./tags;
 " /vim
 
 
@@ -199,5 +200,10 @@ let g:EasyGrepReplaceAllPerFile=0
 " vim-test
 let test#strategy = "asyncrun"
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 " /vim-test
 
