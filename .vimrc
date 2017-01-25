@@ -5,7 +5,8 @@ let g:airline_powerline_fonts = 1
 
 " macvim
 let $GOPATH = '/Users/ross/go' " required for MacVim
-set gfn=hack
+"set guifont=Hack:h11
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 " /macvim
 
 
