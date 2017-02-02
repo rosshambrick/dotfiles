@@ -62,7 +62,7 @@ set number
 " case insensitive searching
 set ignorecase
 " use case sensitive searching when caps present
-set smartcase
+"set smartcase " disabled so ctrP will search for ClassNames that match class_names
 " show unwanted whitespace
 set list listchars=tab:→\ ,trail:·
 " disable wrapping
