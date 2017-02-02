@@ -23,7 +23,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/syntastic'
 Plug 'burnettk/vim-angular'
-Plug 'dkprice/vim-easygrep'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdcommenter'
@@ -33,6 +32,7 @@ Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'mhinz/vim-grepper'
 "Plug 'chiel92/vim-autoformat'
 "Plug '907th/vim-auto-save'
 "Plug 'benmills/vimux'
@@ -209,6 +209,13 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+"nmap <silent> <leader>g :TestVisit<CR> " using <leader>g for Grepper
 " /vim-test
+
+" grepper
+nmap <leader>g :Grepper<CR>
+" /grepper
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
