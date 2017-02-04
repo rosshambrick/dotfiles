@@ -33,8 +33,12 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mhinz/vim-grepper'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'tmhedberg/matchit'
 "Plug 'chiel92/vim-autoformat'
-"Plug '907th/vim-auto-save'
+Plug '907th/vim-auto-save'
+Plug 'craigemery/vim-autotag'
+Plug 'tpope/vim-bundler'
 "Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 "Plug 'fatih/vim-go'
@@ -89,6 +93,9 @@ filetype plugin indent on
 " set foldmethod=syntax
 " set foldnestmax=1
 map <leader>f zfat
+" format all
+nmap <leader>= gg=G<CR>
+"nnoremap <C-=> gg=G<CR> " this doesn't work.  wish it did
 " tags
 set tags=./tags;
 " Change cursor shape between insert and normal mode in iTerm2.app
