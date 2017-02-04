@@ -39,3 +39,9 @@ sudo git lfs install --system
 # ctags - https://www.sitepoint.com/effective-rails-development-vim/
 brew install ctags # run in each project root: ctags -R --exclude=.git --exclude=log *
 
+brew install rbenv
+brew install ruby-build
+brew install rbenv-default-gems
+touch ~/.rbenv/default-gems
+echo "gem-ctags" > ~/.rbenv/default-gems
+
