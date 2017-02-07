@@ -49,7 +49,7 @@ call plug#end()
 
 " vim
 " <leader>
-let mapleader = ','
+let mapleader = ' '
 " clipboard integration
 set clipboard=unnamed
 " UTF-8 support
