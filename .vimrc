@@ -190,30 +190,6 @@ com! DiffSaved call s:DiffWithSaved()
 " /diff
 
 
-" easygrep
-let g:EasyGrepMode=0
-let g:EasyGrepCommand=1
-let g:EasyGrepRecursive=1
-let g:EasyGrepSearchCurrentBufferDir=1
-let g:EasyGrepIgnoreCase=1
-let g:EasyGrepHidden=0
-let g:EasyGrepBinary=0
-let g:EasyGrepFilesToInclude=''
-let g:EasyGrepFilesToExclude='*.swp,*~,bower_components,node_modules'
-let g:EasyGrepAllOptionsInExplorer=1
-let g:EasyGrepWindow=0
-let g:EasyGrepReplaceWindowMode=0
-let g:EasyGrepOpenWindowOnMatch=1
-let g:EasyGrepEveryMatch=0
-let g:EasyGrepJumpToMatch=0
-let g:EasyGrepInvertWholeWord=0
-let g:EasyGrepPatternType='regex'
-let g:EasyGrepFileAssociationsInExplorer=0
-let g:EasyGrepExtraWarnings=0
-let g:EasyGrepOptionPrefix='<leader>vy'
-let g:EasyGrepReplaceAllPerFile=0
-" /easygrep
-
 " vim-test
 let test#strategy = "asyncrun"
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
