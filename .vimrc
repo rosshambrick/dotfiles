@@ -77,6 +77,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" add spacing in normal mode
+nnoremap <Enter> o<Esc>
+nnoremap <S-Enter> O<Esc>
+nnoremap ; :
 " map keys to esc
 inoremap jj <Esc>
 inoremap kk <Esc>
@@ -220,11 +224,12 @@ nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR> " using <leader>g for Grepper
 " /vim-test
 
+
 " grepper
 nnoremap <leader>g :Grepper<CR>
 nnoremap <leader>G :Grepper -cword -noprompt<cr>
-" /grepper
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+" /grepper
 
