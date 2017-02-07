@@ -221,7 +221,8 @@ nmap <silent> <leader>l :TestLast<CR>
 " /vim-test
 
 " grepper
-nmap <leader>g :Grepper<CR>
+nnoremap <leader>g :Grepper<CR>
+nnoremap <leader>G :Grepper -cword -noprompt<cr>
 " /grepper
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
