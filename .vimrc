@@ -48,44 +48,34 @@ call plug#end()
 
 
 " vim
-" <leader>
-let mapleader = ' '
-" clipboard integration
-set clipboard=unnamed
-" UTF-8 support
+set nocompatible      " We're running Vim, not Vi!
+syntax on             " Enable syntax highlighting
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+let mapleader = ' '   " <leader>
+set clipboard=unnamed " clipboard integration
 set encoding=utf-8
-" highlight cursor line
-set cursorline
-" vimux-golang DISABLED
+set cursorline        " highlight cursor line
 " map <Leader>ra :wa<CR> :GolangTestCurrentPackage<CR>
 " map <Leader>rf :wa<CR> :GolangTestFocused<CR>
-" enable mouse
-set mouse=a
-" enable line numbers
-set number
-" case insensitive searching
-set ignorecase
-" use case sensitive searching when caps present
+set mouse=a " enable mouse
+set number  " enable line numbers
+set ignorecase        " case insensitive searching
 "set smartcase " disabled so ctrP will search for ClassNames that match class_names
-" show unwanted whitespace
-set list listchars=tab:→\ ,trail:·
-" disable wrapping
-set formatoptions-=t
-set nowrap
+set list listchars=tab:→\ ,trail:·  " show unwanted whitespace
+set formatoptions-=t  " disable wrapping
+set nowrap            " disable word wrapping
 " better pane navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" add spacing in normal mode
-nnoremap <Enter> o<Esc>
-nnoremap <S-Enter> O<Esc>
 nnoremap ; :
-" map keys to esc
-inoremap jj <Esc>
-inoremap kk <Esc>
-inoremap uu <Esc>
-" better split openning
+"inoremap jj <Esc>
+"inoremap kk <Esc>
+"inoremap uu <Esc>
+"inoremap ll <Esc>
 set splitbelow
 set splitright
 " spaces, not tabs
@@ -97,11 +87,7 @@ filetype plugin indent on
 " set foldmethod=syntax
 " set foldnestmax=1
 map <leader>f zfat
-" format all
-nmap <leader>= gg=G<CR>
-"nnoremap <C-=> gg=G<CR> " this doesn't work.  wish it did
-" tags
-set tags=./tags;
+nmap <leader>= gg=G<CR>  " format all
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
@@ -115,7 +101,7 @@ endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeMapJumpPrevSibling = ''
@@ -123,7 +109,7 @@ let g:NERDTreeMapJumpNextSibling = ''
 let NERDTreeShowHidden=1
 "
 " DISABLED
-" open NERDTree automatically when vim starts up on opening a directory 
+" open NERDTree automatically when vim starts up on opening a directory
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " /nerdtree
 
@@ -197,7 +183,7 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
-"nmap <silent> <leader>g :TestVisit<CR> " using <leader>g for Grepper
+nmap <silent> <leader>v :TestVisit<CR> " using <leader>g for Grepper
 " /vim-test
 
 
