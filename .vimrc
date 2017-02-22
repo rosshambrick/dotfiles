@@ -40,7 +40,7 @@ Plug '907th/vim-auto-save'
 Plug 'craigemery/vim-autotag'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
-Plug 'Townk/vim-autoclose'
+Plug 'jiangmiao/auto-pairs'
 "Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 "Plug 'fatih/vim-go'
@@ -58,7 +58,7 @@ filetype plugin on    " Enable filetype-specific plugins
 let mapleader = ' '   " <leader>
 set clipboard=unnamed " clipboard integration
 set encoding=utf-8
-set cursorline        " highlight cursor line
+"set cursorline        " highlight cursor line [causes slowdown in ruby files]
 " map <Leader>ra :wa<CR> :GolangTestCurrentPackage<CR>
 " map <Leader>rf :wa<CR> :GolangTestFocused<CR>
 set mouse=a " enable mouse
@@ -90,11 +90,16 @@ filetype plugin indent on
 " set foldnestmax=1
 map <leader>f zfat
 nmap <leader>= gg=G<CR>  " format all
+nmap <CR> o<Esc> " enter adds a new line and remains in normal mode
+"nmap <S-CR> <S-O><Esc> "doesn't work for some reason
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+"autocmd BufWritePre * %s/\s\+$//e "remove trailing whitespace
+set spell spelllang=en_us
+imap # #{
 " /vim
 
 
@@ -109,6 +114,7 @@ let g:NERDTreeChDirMode = 2
 let g:NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMapJumpNextSibling = ''
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.swp$']
 "
 " DISABLED
 " open NERDTree automatically when vim starts up on opening a directory
@@ -156,7 +162,7 @@ let g:go_list_type = "quickfix"
 " crtlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
+let g:ctrlp_custom_ignore = { 'dir': 'node_modules\|bower_components', 'file': '\.swp$' }
 " /crtlp
 
 
