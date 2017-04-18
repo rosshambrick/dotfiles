@@ -18,11 +18,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
-Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'scrooloose/syntastic'
-Plug 'burnettk/vim-angular'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdcommenter'
@@ -35,12 +32,22 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
-"Plug 'chiel92/vim-autoformat'
 Plug '907th/vim-auto-save'
 Plug 'craigemery/vim-autotag'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
+Plug 'w0rp/ale'
+Plug 'terryma/vim-expand-region'
+Plug 'sickill/vim-pasta'
+Plug 'yssl/QFEnter'
+Plug 'maralla/completor.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
+"Plug 'ngmy/vim-rubocop'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'chiel92/vim-autoformat'
+"Plug 'Townk/vim-autoclose'
+"Plug 'astashov/vim-ruby-debugger'
 "Plug 'benmills/vimux'
 "Plug 'christoomey/vim-tmux-navigator'
 "Plug 'fatih/vim-go'
@@ -51,55 +58,78 @@ call plug#end()
 
 " vim
 set nocompatible      " We're running Vim, not Vi!
+set undofile
+set undodir=~/.vim/undodir
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 let mapleader = ' '   " <leader>
 set clipboard=unnamed " clipboard integration
-set encoding=utf-8
-"set cursorline        " highlight cursor line [causes slowdown in ruby files]
-" map <Leader>ra :wa<CR> :GolangTestCurrentPackage<CR>
-" map <Leader>rf :wa<CR> :GolangTestFocused<CR>
-set mouse=a " enable mouse
-set number  " enable line numbers
+set encoding=utf-8    " utf8 support
+set mouse=a           " enable mouse
+set number            " enable line numbers
 set ignorecase        " case insensitive searching
-"set smartcase " disabled so ctrP will search for ClassNames that match class_names
 set list listchars=tab:→\ ,trail:·  " show unwanted whitespace
 set formatoptions-=t  " disable wrapping
 set nowrap            " disable word wrapping
-" better pane navigation
+set splitbelow        " avoid overwriting NERDTree Window
+set splitright        " avoid overwriting NERDTree Window"
+set expandtab         " spaces, not tabs
+set shiftwidth=2      " spaces, not tabs
+set softtabstop=2     " spaces, not tabs
+set spell spelllang=en_us
+set hlsearch
+"set smartcase " disabled so ctrP will search for ClassNames that match class_names
+"set cursorline        " highlight cursor line [causes slowdown in ruby files]
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap ; :
-"inoremap jj <Esc>
-"inoremap kk <Esc>
-"inoremap uu <Esc>
-"inoremap ll <Esc>
-set splitbelow
-set splitright
-" spaces, not tabs
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+"nnoremap ; :
+"vnoremap ; :
+nnoremap <Leader>f zfat
+nnoremap <Leader>= gg=G<CR>
+nnoremap <Leader><CR> o<Esc>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
+nnoremap <C-c> :AsyncStop<CR>
+nnoremap <Leader>f :Grepper<CR>
+nnoremap <Leader>F :Grepper -cword -noprompt<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gbrowse<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>r :!rubocop -a %:p<CR>
+nnoremap <Leader>R :!rubocop<CR>
+nnoremap <Leader>q :botright cwindow 20<CR>
+nnoremap <Leader>c :cclose<CR>
+nnoremap <Leader>pw viwp
+" TODO: make the below run async
+nnoremap <Leader>id :!rspec -P %:p:h/*_spec.rb<CR>
+nnoremap * *#
+nnoremap <Leader>h :noh<CR>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+nmap f <Plug>(easymotion-overwin-f2)
+nnoremap <Leader>u i_<Esc>
+nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
+"nnoremap : q:i
+"nnoremap / q/i
+"nnoremap ? q?i
 filetype plugin indent on
-" folding
 " set foldmethod=syntax
 " set foldnestmax=1
-map <leader>f zfat
-nmap <leader>= gg=G<CR>  " format all
-nmap <CR> o<Esc> " enter adds a new line and remains in normal mode
-"nmap <S-CR> <S-O><Esc> "doesn't work for some reason
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 "autocmd BufWritePre * %s/\s\+$//e "remove trailing whitespace
-set spell spelllang=en_us
-imap # #{
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd QuickFixCmdPost *grep* cwindow
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
 " /vim
 
 
@@ -109,31 +139,16 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if the only window left open is a NERDTree
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" open NERDTree automatically when vim starts up on opening a directory
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 let NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMapJumpNextSibling = ''
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.swp$']
-"
-" DISABLED
-" open NERDTree automatically when vim starts up on opening a directory
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+let NERDTreeIgnore = ['\.swp$', '.DS_Store']
+let NERDTreeMapOpenVSplit = 'v'
 " /nerdtree
-
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" disable active mode for go files
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-" /syntastic
 
 
 " solarized
@@ -196,10 +211,22 @@ nmap <silent> <leader>v :TestVisit<CR> " using <leader>g for Grepper
 
 
 " grepper
-nnoremap <leader>g :Grepper<CR>
-nnoremap <leader>G :Grepper -cword -noprompt<cr>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 " /grepper
 
+
+" vim-ruby
+"let ruby_fold = 1
+let ruby_foldable_groups = 'def it'
+" /vim-ruby
+
+" ale
+let g:ale_sign_column_always = 1
+" /ale
+
+
+" editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+"
