@@ -86,8 +86,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-"nnoremap ; :
-"vnoremap ; :
 nnoremap <Leader>f zfat
 nnoremap <Leader>= gg=G<CR>
 nnoremap <Leader><CR> o<Esc>
@@ -113,9 +111,11 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nmap f <Plug>(easymotion-overwin-f2)
 nnoremap <Leader>u i_<Esc>
 nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
-"nnoremap : q:i
-"nnoremap / q/i
-"nnoremap ? q?i
+nmap <silent> <Leader>t :TestNearest<CR>
+nmap <silent> <Leader>T :TestFile<CR>
+nmap <silent> <Leader>a :TestSuite<CR>
+nmap <silent> <Leader>l :TestLast<CR>
+nmap <silent> <Leader>v :TestVisit<CR> " using <leader>g for Grepper
 filetype plugin indent on
 " set foldmethod=syntax
 " set foldnestmax=1
@@ -202,11 +202,6 @@ com! DiffSaved call s:DiffWithSaved()
 " vim-test
 let test#strategy = "asyncrun"
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>v :TestVisit<CR> " using <leader>g for Grepper
 " /vim-test
 
 
