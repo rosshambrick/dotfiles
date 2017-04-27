@@ -1,7 +1,3 @@
-" airline
-let g:airline_powerline_fonts = 1
-" /airline
-
 
 " macvim
 let $GOPATH = '/Users/ross/go' " required for MacVim
@@ -20,10 +16,10 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'embear/vim-localvimrc'
+"Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+"Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ternjs/tern_for_vim'
+"Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-abolish'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
@@ -80,8 +76,10 @@ set shiftwidth=2      " spaces, not tabs
 set softtabstop=2     " spaces, not tabs
 set spell spelllang=en_us
 set hlsearch
-"set smartcase " disabled so ctrP will search for ClassNames that match class_names
-"set cursorline        " highlight cursor line [causes slowdown in ruby files]
+set relativenumber
+set number
+set smartcase " disabled so ctrP will search for ClassNames that match class_names
+set cursorline        " highlight cursor line [causes slowdown in ruby files]
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -98,24 +96,25 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gbrowse<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>r :!rubocop -a %:p<CR>
 nnoremap <Leader>R :!rubocop<CR>
-nnoremap <Leader>q :botright cwindow 20<CR>
-nnoremap <Leader>c :cclose<CR>
+nnoremap <Leader>qo :botright cwindow 20<CR>
+nnoremap <Leader>qc :cclose<CR>
 nnoremap <Leader>pw viwp
-" TODO: make the below run async
-nnoremap <Leader>id :!rspec -P %:p:h/*_spec.rb<CR>
-nnoremap * *#
 nnoremap <Leader>h :noh<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nmap f <Plug>(easymotion-overwin-f2)
 nnoremap <Leader>u i_<Esc>
-nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
-nmap <silent> <Leader>t :TestNearest<CR>
-nmap <silent> <Leader>T :TestFile<CR>
-nmap <silent> <Leader>a :TestSuite<CR>
-nmap <silent> <Leader>l :TestLast<CR>
-nmap <silent> <Leader>v :TestVisit<CR> " using <leader>g for Grepper
+map <Leader>id :put =strftime('%b %d, %Y')<Esc>
+nnoremap <silent> <Leader>t :TestNearest<CR>
+nnoremap <silent> <Leader>T :TestFile<CR>
+nnoremap <silent> <Leader>a :TestSuite<CR>
+nnoremap <silent> <Leader>l :TestLast<CR>
+nnoremap <silent> <Leader>v :TestVisit<CR>
+nnoremap <Leader>d :!rspec -P %:p:h/*_spec.rb<CR>
+nnoremap <C-]> g<C-]>
 filetype plugin indent on
 " set foldmethod=syntax
 " set foldnestmax=1
@@ -201,7 +200,6 @@ com! DiffSaved call s:DiffWithSaved()
 
 " vim-test
 let test#strategy = "asyncrun"
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 " /vim-test
 
 
@@ -225,3 +223,13 @@ let g:ale_sign_column_always = 1
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 "
+
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline_detect_spell = 0
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:airline_inactive_collapse = 1
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#branch#enabled = 0
+" /airline
+
