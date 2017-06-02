@@ -1,52 +1,34 @@
-
-" macvim
-let $GOPATH = '/Users/ross/go' " required for MacVim
-"set guifont=Hack:h11
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-" /macvim
-
-
 " plugins
 let g:plug_window = 'vertical botright new'
 call plug#begin()
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-"Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-"Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'ternjs/tern_for_vim'
-Plug 'tpope/vim-abolish'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tmhedberg/matchit'
-Plug '907th/vim-auto-save'
-Plug 'craigemery/vim-autotag'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
 Plug 'w0rp/ale'
-Plug 'terryma/vim-expand-region'
 Plug 'sickill/vim-pasta'
 Plug 'yssl/QFEnter'
 Plug 'maralla/completor.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'ngmy/vim-rubocop'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'chiel92/vim-autoformat'
-"Plug 'Townk/vim-autoclose'
-"Plug 'astashov/vim-ruby-debugger'
-"Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
-"Plug 'fatih/vim-go'
+Plug 'craigemery/vim-autotag'
+Plug 'scrooloose/nerdtree'
+Plug 'rizzatti/dash.vim'
+Plug 'fatih/vim-go'
+Plug '907th/vim-auto-save'
 Plug 'bling/vim-airline' " must run last
 call plug#end()
 " /plugins
@@ -54,8 +36,8 @@ call plug#end()
 
 " vim
 set nocompatible      " We're running Vim, not Vi!
-set undofile
-set undodir=~/.vim/undodir
+set undofile          " Persistent undo
+set undodir=~/.vim/undodir " Persistant undo
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
@@ -64,7 +46,6 @@ let mapleader = ' '   " <leader>
 set clipboard=unnamed " clipboard integration
 set encoding=utf-8    " utf8 support
 set mouse=a           " enable mouse
-set number            " enable line numbers
 set ignorecase        " case insensitive searching
 set list listchars=tab:→\ ,trail:·  " show unwanted whitespace
 set formatoptions-=t  " disable wrapping
@@ -76,10 +57,11 @@ set shiftwidth=2      " spaces, not tabs
 set softtabstop=2     " spaces, not tabs
 set spell spelllang=en_us
 set hlsearch
-set relativenumber
-set number
-set smartcase " disabled so ctrP will search for ClassNames that match class_names
+set relativenumber    " relative line numbers
+set number            " enable line numbers
+set smartcase
 set cursorline        " highlight cursor line [causes slowdown in ruby files]
+set laststatus=2      " always show airline status
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -100,22 +82,30 @@ nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gp :Gpush<CR>
 nnoremap <Leader>r :!rubocop -a %:p<CR>
 nnoremap <Leader>R :!rubocop<CR>
-nnoremap <Leader>qo :botright cwindow 20<CR>
-nnoremap <Leader>qc :cclose<CR>
+nnoremap <Leader>oq :cclose<CR> :botright cwindow 20<CR>
+nnoremap <Leader>cq :cclose<CR>
 nnoremap <Leader>pw viwp
 nnoremap <Leader>h :noh<CR>
+nnoremap <Leader>u i_<Esc>
+nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
+nnoremap <silent> <Leader>tt :TestNearest<CR>
+nnoremap <silent> <Leader>tf :TestFile<CR>
+nnoremap <silent> <Leader>ts :TestSuite<CR>
+nnoremap <silent> <Leader>tl :TestLast<CR>
+nnoremap <silent> <Leader>tv :TestVisit<CR>
+nnoremap <Leader>td :!rspec -P %:p:h/*_spec.rb<CR>
+nnoremap <C-]> g<C-]>
+nnoremap <Leader>bd :set background=dark<CR>
+nnoremap <Leader>bl :set background=light<CR>
+nnoremap <Leader>dw :%s/\s\+$//<CR>
+nnoremap <Leader>e :Explore<CR>
+nnoremap <Leader>it ^i[ ] 
+nnoremap <Leader>on :NERDTree<CR>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nmap f <Plug>(easymotion-overwin-f2)
-nnoremap <Leader>u i_<Esc>
-map <Leader>id :put =strftime('%b %d, %Y')<Esc>
-nnoremap <silent> <Leader>t :TestNearest<CR>
-nnoremap <silent> <Leader>T :TestFile<CR>
-nnoremap <silent> <Leader>a :TestSuite<CR>
-nnoremap <silent> <Leader>l :TestLast<CR>
-nnoremap <silent> <Leader>v :TestVisit<CR>
-nnoremap <Leader>d :!rspec -P %:p:h/*_spec.rb<CR>
-nnoremap <C-]> g<C-]>
-filetype plugin indent on
+"inoremap <CR> <Esc>
+"inoremap <C-CR> <CR>
 " set foldmethod=syntax
 " set foldnestmax=1
 " Change cursor shape between insert and normal mode in iTerm2.app
@@ -124,7 +114,7 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 "autocmd BufWritePre * %s/\s\+$//e "remove trailing whitespace
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown " required per: https://github.com/tpope/vim-markdown
 autocmd QuickFixCmdPost *grep* cwindow
 if has('mouse_sgr')
   set ttymouse=sgr
@@ -134,8 +124,8 @@ endif
 
 " nerdtree
 " open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if the only window left open is a NERDTree
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " open NERDTree automatically when vim starts up on opening a directory
@@ -169,14 +159,14 @@ let g:go_highlight_build_constraints = 1
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 " fix conflict with syntastic
-let g:go_list_type = "quickfix"
+"let g:go_list_type = "quickfix"
 " /vim-go
 
 
 " crtlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
-let g:ctrlp_custom_ignore = { 'dir': 'node_modules\|bower_components', 'file': '\.swp$' }
+let g:ctrlp_custom_ignore = { 'dir': 'node_modules|bower_components|undodir', 'file': '\.swp$' }
 " /crtlp
 
 
@@ -216,7 +206,7 @@ let ruby_foldable_groups = 'def it'
 " /vim-ruby
 
 " ale
-let g:ale_sign_column_always = 1
+"let g:ale_sign_column_always = 1
 " /ale
 
 

@@ -113,7 +113,9 @@ alias tl='tmux ls'
 alias tn='tmux new -s'
 alias tk='tmux kill-session -t'
 
+#git
 alias git='noglob git'
+alias gdl='git diff HEAD^'
 
 # added by travis gem
 [ -f /Users/ross/.travis/travis.sh ] && source /Users/ross/.travis/travis.sh
