@@ -62,6 +62,7 @@ set number            " enable line numbers
 set smartcase
 set cursorline        " highlight cursor line [causes slowdown in ruby files]
 set laststatus=2      " always show airline status
+set timeoutlen=1000 ttimeoutlen=0 " remove delay when exiting insert mode
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
