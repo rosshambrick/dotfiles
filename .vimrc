@@ -28,7 +28,6 @@ Plug 'craigemery/vim-autotag'
 Plug 'scrooloose/nerdtree'
 Plug 'rizzatti/dash.vim'
 Plug 'fatih/vim-go'
-Plug '907th/vim-auto-save'
 Plug 'bling/vim-airline' " must run last
 call plug#end()
 " /plugins
@@ -63,15 +62,17 @@ set smartcase
 set cursorline        " highlight cursor line [causes slowdown in ruby files]
 set laststatus=2      " always show airline status
 set timeoutlen=1000 ttimeoutlen=0 " remove delay when exiting insert mode
+set updatetime=200
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <C-]> g<C-]>
+nnoremap <C-c> :AsyncStop<CR>
 nnoremap <Leader>f zfat
 nnoremap <Leader>= gg=G<CR>
 nnoremap <Leader><CR> o<Esc>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
-nnoremap <C-c> :AsyncStop<CR>
 nnoremap <Leader>f :Grepper<CR>
 nnoremap <Leader>F :Grepper -cword -noprompt<CR>
 nnoremap <Leader>gs :Gstatus<CR>
@@ -89,19 +90,19 @@ nnoremap <Leader>pw viwp
 nnoremap <Leader>h :noh<CR>
 nnoremap <Leader>u i_<Esc>
 nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
-nnoremap <silent> <Leader>tt :TestNearest<CR>
-nnoremap <silent> <Leader>tf :TestFile<CR>
-nnoremap <silent> <Leader>ts :TestSuite<CR>
-nnoremap <silent> <Leader>tl :TestLast<CR>
-nnoremap <silent> <Leader>tv :TestVisit<CR>
+nnoremap <Leader>tt :TestNearest<CR>
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>ts :TestSuite<CR>
+nnoremap <Leader>tl :TestLast<CR>
+nnoremap <Leader>tv :TestVisit<CR>
 nnoremap <Leader>td :!rspec -P %:p:h/*_spec.rb<CR>
-nnoremap <C-]> g<C-]>
 nnoremap <Leader>bd :set background=dark<CR>
 nnoremap <Leader>bl :set background=light<CR>
 nnoremap <Leader>dw :%s/\s\+$//<CR>
 nnoremap <Leader>e :Explore<CR>
 nnoremap <Leader>it ^i[ ] 
 nnoremap <Leader>on :NERDTree<CR>
+nnoremap <Leader>gf :GoFmt<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nmap f <Plug>(easymotion-overwin-f2)
@@ -114,12 +115,12 @@ if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
-"autocmd BufWritePre * %s/\s\+$//e "remove trailing whitespace
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown " required per: https://github.com/tpope/vim-markdown
-autocmd QuickFixCmdPost *grep* cwindow
 if has('mouse_sgr')
   set ttymouse=sgr
 endif
+au BufNewFile,BufReadPost *.md set filetype=markdown " required per: https://github.com/tpope/vim-markdown
+au QuickFixCmdPost *grep* cwindow
+au CursorHold * nested silent! w
 " /vim
 
 
@@ -159,8 +160,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
-" fix conflict with syntastic
-"let g:go_list_type = "quickfix"
+let g:go_fmt_experimental = 1
 " /vim-go
 
 
@@ -169,12 +169,6 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
 let g:ctrlp_custom_ignore = { 'dir': 'node_modules|bower_components|undodir', 'file': '\.swp$' }
 " /crtlp
-
-
-" vim-auto-save
-let g:auto_save = 1  " enable AutoSave on Vim startup
-let g:auto_save_in_insert_mode = 0
-" /vim-auto-save
 
 
 " diff buffer with saved file
