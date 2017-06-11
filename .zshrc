@@ -98,14 +98,14 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 # ZSH
-alias zshrc="vim ~/.zshrc"
+alias zshrc="vim ~/src/dotfiles/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # Vim
-alias vimrc="vim ~/.vimrc"
+alias vimrc="vim ~/src/dotfiles/.vimrc"
 
 # VimGo
-alias vimgo='vim -u ~/.vimrc.go'
+alias vimgo='vim ~/src/dotfiles/.vimrc.go'
 
 #tmux
 alias ta='tmux a -t'
@@ -116,6 +116,7 @@ alias tk='tmux kill-session -t'
 #git
 alias git='noglob git'
 alias gdl='git diff HEAD^'
+alias gh='sh ~/src/dotfiles/gh.sh'
 
 # added by travis gem
 [ -f /Users/ross/.travis/travis.sh ] && source /Users/ross/.travis/travis.sh
