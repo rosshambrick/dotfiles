@@ -63,6 +63,10 @@ set cursorline        " highlight cursor line [causes slowdown in ruby files]
 set laststatus=2      " always show airline status
 set timeoutlen=1000 ttimeoutlen=0 " remove delay when exiting insert mode
 set updatetime=200
+set gdefault
+set wildmenu
+set wildmode=full
+set autoread
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -106,8 +110,6 @@ nnoremap <Leader>gf :GoFmt<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 nmap f <Plug>(easymotion-overwin-f2)
-"inoremap <CR> <Esc>
-"inoremap <C-CR> <CR>
 " set foldmethod=syntax
 " set foldnestmax=1
 " Change cursor shape between insert and normal mode in iTerm2.app
@@ -118,9 +120,10 @@ endif
 if has('mouse_sgr')
   set ttymouse=sgr
 endif
-au BufNewFile,BufReadPost *.md set filetype=markdown " required per: https://github.com/tpope/vim-markdown
-au QuickFixCmdPost *grep* cwindow
-au CursorHold * nested silent! w
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown " required per: https://github.com/tpope/vim-markdown
+autocmd QuickFixCmdPost *grep* cwindow
+autocmd CursorHold * nested silent! update
+autocmd VimResized * wincmd =
 " /vim
 
 
