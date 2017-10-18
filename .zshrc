@@ -118,6 +118,12 @@ alias git='noglob git'
 alias gdl='git diff HEAD^'
 alias gh='sh ~/src/dotfiles/gh.sh'
 
+#ruby
+alias be='bundle exec'
+
+#fixops
+alias f='fixops'
+
 # added by travis gem
 [ -f /Users/ross/.travis/travis.sh ] && source /Users/ross/.travis/travis.sh
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
@@ -166,3 +172,5 @@ zle -N zle-keymap-select
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,19 +1,21 @@
 " plugins
 let g:plug_window = 'vertical botright new'
 call plug#begin()
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-bundler'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'janko-m/vim-test'
-Plug 'vim-ruby/vim-ruby'
+"Plug 'janko-m/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ecomba/vim-ruby-refactoring'
@@ -28,6 +30,9 @@ Plug 'craigemery/vim-autotag'
 Plug 'scrooloose/nerdtree'
 Plug 'rizzatti/dash.vim'
 Plug 'fatih/vim-go'
+Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+Plug 'lifepillar/pgsql.vim'
 Plug 'bling/vim-airline' " must run last
 call plug#end()
 " /plugins
@@ -46,6 +51,7 @@ set clipboard=unnamed " clipboard integration
 set encoding=utf-8    " utf8 support
 set mouse=a           " enable mouse
 set ignorecase        " case insensitive searching
+set infercase
 set list listchars=tab:→\ ,trail:·  " show unwanted whitespace
 set formatoptions-=t  " disable wrapping
 set nowrap            " disable word wrapping
@@ -67,11 +73,23 @@ set gdefault
 set wildmenu
 set wildmode=full
 set autoread
+set vb
+set scrolloff=5
+set nobackup
+set nowritebackup
+set noswapfile
+set title
+set autoindent
+set smartindent
+set tags+=gems.tags
+set autowrite
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-]> g<C-]>
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-m> :cprevious<CR>
 nnoremap <C-c> :AsyncStop<CR>
 nnoremap <Leader>f zfat
 nnoremap <Leader>= gg=G<CR>
@@ -94,11 +112,11 @@ nnoremap <Leader>pw viwp
 nnoremap <Leader>h :noh<CR>
 nnoremap <Leader>u i_<Esc>
 nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
-nnoremap <Leader>tt :TestNearest<CR>
-nnoremap <Leader>tf :TestFile<CR>
-nnoremap <Leader>ts :TestSuite<CR>
-nnoremap <Leader>tl :TestLast<CR>
-nnoremap <Leader>tv :TestVisit<CR>
+"nnoremap <Leader>tt :TestNearest<CR>
+"nnoremap <Leader>tf :TestFile<CR>
+"nnoremap <Leader>ts :TestSuite<CR>
+"nnoremap <Leader>tl :TestLast<CR>
+"nnoremap <Leader>tv :TestVisit<CR>
 nnoremap <Leader>td :!rspec -P %:p:h/*_spec.rb<CR>
 nnoremap <Leader>bd :set background=dark<CR>
 nnoremap <Leader>bl :set background=light<CR>
@@ -107,8 +125,12 @@ nnoremap <Leader>e :Explore<CR>
 nnoremap <Leader>it ^i[ ] 
 nnoremap <Leader>on :NERDTree<CR>
 nnoremap <Leader>gf :GoFmt<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <silent><Leader>. q:k<CR>
+nnoremap <Leader>p "0p
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap {<CR> {<CR><CR>}<up>  
 nmap f <Plug>(easymotion-overwin-f2)
 " set foldmethod=syntax
 " set foldnestmax=1
@@ -124,6 +146,21 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown " required per: https:
 autocmd QuickFixCmdPost *grep* cwindow
 autocmd CursorHold * nested silent! update
 autocmd VimResized * wincmd =
+autocmd FileType go setlocal noexpandtab
+autocmd FileType go nmap <leader>ts <Plug>(go-test)
+autocmd FileType go nmap <leader>tt <Plug>(go-test-func)
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 " /vim
 
 
@@ -131,10 +168,10 @@ autocmd VimResized * wincmd =
 " open a NERDTree automatically when vim starts up if no files were specified
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" close vim if the only window left open is a NERDTree
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " open NERDTree automatically when vim starts up on opening a directory
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowBookmarks = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeMapJumpPrevSibling = ''
@@ -154,23 +191,23 @@ colorscheme solarized
 
 " vim-go
 let g:go_gocode_unimported_packages = 1
-" By default syntax-highlighting for Functions, Methods and Structs is disabled. To change it:
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 let g:go_fmt_experimental = 1
+let g:go_metalinter_autosave = 0
 " /vim-go
 
 
 " crtlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'rw'
-let g:ctrlp_custom_ignore = { 'dir': 'node_modules|bower_components|undodir', 'file': '\.swp$' }
+let g:ctrlp_custom_ignore = { 'dir': 'node_modules|bower_components|undodir|.git', 'file': '\.swp$' }
 " /crtlp
 
 
@@ -192,9 +229,11 @@ let test#strategy = "asyncrun"
 
 
 " grepper
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+"if executable('ag')
+runtime plugin/grepper.vim
+let g:grepper.ag.grepprg .= ' --hidden --ignore=.git'
+let g:grepper.quickfix = 0
+"endif
 " /grepper
 
 
@@ -205,12 +244,13 @@ let ruby_foldable_groups = 'def it'
 
 " ale
 "let g:ale_sign_column_always = 1
+let g:ale_linters = { 'ruby': [] }
 " /ale
 
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-"
+" /editorconfig
 
 " airline
 let g:airline_powerline_fonts = 1
@@ -221,3 +261,12 @@ let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#branch#enabled = 0
 " /airline
 
+" completor.vim
+imap <expr> <C-j> pumvisible() ? "\<down>" : "\<C-j>"
+imap <expr> <C-k> pumvisible() ? "\<up>" : "\<C-k>"
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" /completor.vim
+
+" pgsql.vim
+let g:sql_type_default = 'pgsql'
+" /pgsql.vim
