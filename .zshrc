@@ -174,3 +174,6 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+setopt HIST_IGNORE_ALL_DUPS
+

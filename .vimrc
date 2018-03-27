@@ -15,7 +15,7 @@ Plug 'tpope/vim-bundler'
 Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'janko-m/vim-test'
+Plug 'janko-m/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'ecomba/vim-ruby-refactoring'
@@ -149,6 +149,11 @@ autocmd VimResized * wincmd =
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go nmap <leader>ts <Plug>(go-test)
 autocmd FileType go nmap <leader>tt <Plug>(go-test-func)
+autocmd FileType ruby nnoremap <Leader>tt :TestNearest<CR>
+autocmd FileType ruby nnoremap <Leader>tf :TestFile<CR>
+autocmd FileType ruby nnoremap <Leader>ts :TestSuite<CR>
+autocmd FileType ruby nnoremap <Leader>tl :TestLast<CR>
+autocmd FileType ruby nnoremap <Leader>tv :TestVisit<CR>
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -166,8 +171,8 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " nerdtree
 " open a NERDTree automatically when vim starts up if no files were specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " open NERDTree automatically when vim starts up on opening a directory
 "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " close vim if the only window left open is a NERDTree
