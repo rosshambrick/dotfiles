@@ -87,14 +87,16 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap <C-]> g<C-]>
+nmap <C-]> g<C-]>
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-m> :cprevious<CR>
 nnoremap <C-c> :AsyncStop<CR>
 nnoremap <Leader>f zfat
+"format all
 nnoremap <Leader>= gg=G<CR>
+"add line
 nnoremap <Leader><CR> o<Esc>
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//I<Left><Left>
 nnoremap <Leader>f :Grepper<CR>
 nnoremap <Leader>F :Grepper -cword -noprompt<CR>
 nnoremap <Leader>gs :Gstatus<CR>
@@ -104,28 +106,26 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gl :Glog<CR>
 nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gp :Gpush<CR>
-nnoremap <Leader>r :!rubocop -a %:p<CR>
-nnoremap <Leader>R :!rubocop<CR>
+"nnoremap <Leader>r :!rubocop -a %:p<CR>
+"nnoremap <Leader>R :!rubocop<CR>
 nnoremap <Leader>oq :cclose<CR> :botright cwindow 20<CR>
 nnoremap <Leader>cq :cclose<CR>
+"paste over word
 nnoremap <Leader>pw viwp
 nnoremap <Leader>h :noh<CR>
+"add underscore
 nnoremap <Leader>u i_<Esc>
 nnoremap <Leader>id :put =strftime('%b %d, %Y')<Esc>
-"nnoremap <Leader>tt :TestNearest<CR>
-"nnoremap <Leader>tf :TestFile<CR>
-"nnoremap <Leader>ts :TestSuite<CR>
-"nnoremap <Leader>tl :TestLast<CR>
-"nnoremap <Leader>tv :TestVisit<CR>
-nnoremap <Leader>td :!rspec -P %:p:h/*_spec.rb<CR>
 nnoremap <Leader>bd :set background=dark<CR>
 nnoremap <Leader>bl :set background=light<CR>
+"delete whitespace
 nnoremap <Leader>dw :%s/\s\+$//<CR>
 nnoremap <Leader>e :Explore<CR>
+"insert check box
 nnoremap <Leader>it ^i[ ] 
 nnoremap <Leader>on :NERDTree<CR>
-nnoremap <Leader>gf :GoFmt<CR>
-nnoremap <Leader>q :q<CR>
+"nnoremap <Leader>gf :GoFmt<CR>
+"nnoremap <Leader>q :q<CR>
 nnoremap <silent><Leader>. q:k<CR>
 nnoremap <Leader>p "0p
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -148,24 +148,26 @@ autocmd CursorHold * nested silent! update
 autocmd VimResized * wincmd =
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go nmap <leader>ts <Plug>(go-test)
-autocmd FileType go nmap <leader>tt <Plug>(go-test-func)
+"autocmd FileType go nmap <leader>tt <Plug>(go-test-func)
+autocmd FileType go nmap <leader>tt :!make<CR>
 autocmd FileType ruby nnoremap <Leader>tt :TestNearest<CR>
 autocmd FileType ruby nnoremap <Leader>tf :TestFile<CR>
 autocmd FileType ruby nnoremap <Leader>ts :TestSuite<CR>
 autocmd FileType ruby nnoremap <Leader>tl :TestLast<CR>
 autocmd FileType ruby nnoremap <Leader>tv :TestVisit<CR>
+autocmd FileType ruby nnoremap <Leader>td :!rspec -P %:p:h/*_spec.rb<CR>
 
 " run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
+"function! s:build_go_files()
+"  let l:file = expand('%')
+"  if l:file =~# '^\f\+_test\.go$'
+"    call go#test#Test(0, 1)
+"  elseif l:file =~# '^\f\+\.go$'
+"    call go#cmd#Build(0)
+"  endif
+"endfunction
 
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+"autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 " /vim
 
 

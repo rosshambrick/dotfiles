@@ -59,9 +59,9 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 # Android
-export ANDROID_HOME="/Users/ross/Library/Android/sdk"
-export PATH="$PATH:/Users/ross/Library/Android/sdk/platform-tools"
-export PATH="$PATH:/Users/ross/tools/dex-method-counts"
+#export ANDROID_HOME="/Users/ross/Library/Android/sdk"
+#export PATH="$PATH:/Users/ross/Library/Android/sdk/platform-tools"
+#export PATH="$PATH:/Users/ross/tools/dex-method-counts"
 
 # Swift
 export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:$PATH
@@ -70,7 +70,7 @@ export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:$PATH
 export EDITOR=vim
 
 # scmpuff
-eval "$(scmpuff init -s)"
+#eval "$(scmpuff init -s)"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -124,6 +124,16 @@ alias be='bundle exec'
 #fixops
 alias f='fixops'
 
+#Go
+alias de='dep ensure && dep prune'
+alias du='dep ensure -update && dep prune'
+
+#Rip Grep
+alias rg='rg --hidden --ignore-file ~/src/dotfiles/.rgignore'
+
+#richgo
+alias go='richgo'
+
 # added by travis gem
 [ -f /Users/ross/.travis/travis.sh ] && source /Users/ross/.travis/travis.sh
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
@@ -176,4 +186,4 @@ bindkey "^[[B" history-beginning-search-forward
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 setopt HIST_IGNORE_ALL_DUPS
-
+setopt nobanghist
